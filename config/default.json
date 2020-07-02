@@ -1,4 +1,4 @@
 {
   "mongoURI": "mongodb+srv://<username>:<password>@contactkeeper.nrat2.azure.mongodb.net/<dbname>?retryWrites=true&w=majority",
-  "status": "testing"
+  "status": "more testing"
 }
