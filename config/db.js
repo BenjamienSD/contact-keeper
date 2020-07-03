@@ -5,19 +5,19 @@ const db = config.get('mongoURI');
 
 // info: mongoose returns promises
 
-const connectDB = () => {
-  mongoose
-    .connect(db, {
+const connectDB = async () => {
+  try {
+    await mongoose.connect(db, {
       useNewUrlParser: true,
       useCreateIndex: true,
       useFindAndModify: false,
       useUnifiedTopology: true,
-    })
-    .then(() => console.log('MongoDB Connected'))
-    .catch((err) => {
-      console.error(err.message);
-      process.exit(1);
-    });
+    }),
+      console.log('MongoDB Connected...');
+  } catch (err) {
+    console.error(err.message);
+    process.exit(1);
+  }
 };
 
 module.exports = connectDB;

@@ -11,6 +11,9 @@ const app = express();
 // connect database
 connectDB();
 
+// initialize middleware, returns middleware that only parses json and only looks at requests where the Content-Type header matches the type option.
+app.use(express.json({ extended: false }));
+
 // add endpoint route
 app.get('/', (req, res) => {
   res.json({ msg: 'welcome to the contact keeper api' });
