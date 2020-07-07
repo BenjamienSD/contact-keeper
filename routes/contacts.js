@@ -7,6 +7,7 @@ const User = require('../models/UserModel');
 const Contact = require('../models/ContactModel');
 const { check, validationResult } = require('express-validator');
 const auth = require('../middleware/auth');
+const { restart } = require('nodemon');
 
 // @route   GET api/contacts
 // @desc    Get the contacts belonging to logged in user
@@ -26,22 +27,86 @@ router.get('/', auth, async (req, res) => {
 // @route   POST api/contacts
 // @desc    Add a contact for the logged in user
 // @access  Private
-router.post('/', (req, res) => {
-  res.send('Add a contact for the logged in user');
-});
+router.post(
+  '/',
+  [auth, [check('name', 'Name is required').not().isEmpty()]],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { name, email, phone, type } = req.body;
+
+    try {
+      const newContact = new Contact({
+        name,
+        email,
+        phone,
+        type,
+        user: req.user.id,
+      });
+      const contact = await newContact.save();
+      res.json(contact);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server error...');
+    }
+  }
+);
 
 // @route   PUT api/contacts/:id
 // @desc    Edit a contact for the logged in user
 // @access  Private
-router.put('/:id', (req, res) => {
-  res.send('Edit a contact for the logged in user');
+router.put('/:id', auth, async (req, res) => {
+  const { name, email, phone, type } = req.body;
+  // build a contact object
+  const contactFields = {};
+  if (name) contactFields.name = name;
+  if (email) contactFields.email = email;
+  if (phone) contactFields.phone = phone;
+  if (type) contactFields.type = type;
+  // check if action is allowed
+  try {
+    let contact = await Contact.findById(req.params.id);
+    if (!contact) return res.status(404).json({ msg: 'Contact not found' });
+    // make sure user owns contact
+    if (contact.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'Not authorized' });
+    }
+    contact = await Contact.findByIdAndUpdate(
+      req.params.id,
+      { $set: contactFields },
+      { new: true }
+    );
+
+    res.json(contact);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error...');
+  }
 });
 
 // @route   DELETE api/contacts/:id
 // @desc    Delete a contact for the logged in user
 // @access  Private
-router.delete('/:id', (req, res) => {
-  res.send('Delete a contact for the logged in user');
+router.delete('/:id', auth, async (req, res) => {
+  // check if action is allowed
+  try {
+    let contact = await Contact.findById(req.params.id);
+    if (!contact) return res.status(404).json({ msg: 'Contact not found' });
+    // make sure user owns contact
+    if (contact.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'Not authorized' });
+    }
+
+    await Contact.findByIdAndRemove(req.params.id);
+
+    res.json({ msg: 'Contact removed' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error...');
+  }
 });
 
 module.exports = router;
