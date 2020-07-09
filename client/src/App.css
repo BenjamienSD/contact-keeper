@@ -4,8 +4,8 @@
 :root {
   --primary-color: #83a598;
   --dark-color: #504945;
-  --light-color: #f9f5d7;
-  --danger-color: #cc241d;
+  --light-color: #fdf5eb;
+  --danger-color: #d1433e;
   --success-color: #8ec07c;
 }
 
@@ -19,7 +19,7 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  background-color: #f9f5d7;
+  background-color: #faf6f2;
   color: #3c3836;
 }
 
@@ -41,6 +41,10 @@ img {
 }
 
 /* Utilities */
+.capitalize {
+  text-transform: capitalize;
+}
+
 .container {
   max-width: 1100px;
   margin: auto;
@@ -95,6 +99,7 @@ img {
   padding: 1rem;
   border: #ccc 1px dotted;
   margin: 0.7rem 0;
+  border-radius: 5px;
 }
 
 /* List */
@@ -236,7 +241,7 @@ img {
 .badge-primary,
 .alert-primary {
   background: var(--primary-color);
-  color: #f9f5d7;
+  color: #fdf5eb;
 }
 
 .btn-light,
@@ -252,7 +257,7 @@ img {
 .badge-dark,
 .alert-dark {
   background: var(--dark-color);
-  color: #f9f5d7;
+  color: #fdf5eb;
 }
 
 .btn-danger,
@@ -260,7 +265,7 @@ img {
 .badge-danger,
 .alert-danger {
   background: var(--danger-color);
-  color: #f9f5d7;
+  color: #fdf5eb;
 }
 
 .btn-success,
@@ -268,14 +273,14 @@ img {
 .badge-success,
 .alert-success {
   background: var(--success-color);
-  color: #f9f5d7;
+  color: #fdf5eb;
 }
 
 .btn-white,
 .bg-white,
 .badge-white,
 .alert-white {
-  background: #f9f5d7;
+  background: #fdf5eb;
   color: #333;
   border: #ccc solid 1px;
 }
@@ -371,7 +376,7 @@ table th {
 }
 
 .navbar a {
-  color: #f9f5d7;
+  color: #fdf5eb;
   padding: 0.45rem;
   margin: 0 0.25rem;
 }
