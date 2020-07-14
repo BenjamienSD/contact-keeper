@@ -10,10 +10,18 @@ export const Navbar = ({ title, icon }) => {
       </h1>
       <ul>
         <li>
-          <Link to='/'>Home</Link>
-          <Link to='/login'>Login</Link>
-          <Link to='/register'>Register</Link>
-          <Link to='/about'>About</Link>
+          <Link to='/'>
+            <i class='fas fa-home'></i> Home
+          </Link>
+          <Link to='/login'>
+            <i class='fas fa-sign-in-alt'></i> Login
+          </Link>
+          <Link to='/register'>
+            <i class='fas fa-fingerprint'></i> Register
+          </Link>
+          <Link to='/about'>
+            <i class='far fa-question-circle'></i> About
+          </Link>
         </li>
       </ul>
     </div>
@@ -27,7 +35,7 @@ Navbar.propTypes = {
 
 Navbar.defaultProps = {
   title: 'Contact Keeper',
-  icon: 'fas fa-id-card-alt',
+  icon: 'far fa-address-card',
 };
 
 export default Navbar;
