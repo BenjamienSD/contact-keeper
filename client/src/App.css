@@ -418,21 +418,21 @@ table th {
 /* Animation (Add After) */
 .item-enter {
   opacity: 0;
-  transform: translate3d(0, 100%, 0);
+  transform: translate3d(0, 100%, 0) scale3d(0, 0, 0);
 }
 .item-enter-active {
   opacity: 1;
   transition: all 250ms;
-  transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
 }
 .item-exit {
   opacity: 1;
-  transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
 }
 .item-exit-active {
   opacity: 0;
   transition: all 250ms;
-  transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0) scale3d(0, 1, 1);
 }
 
 /* Mobile Styles */
