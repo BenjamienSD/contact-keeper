@@ -7,13 +7,30 @@ import ContactItem from './ContactItem';
 const Contacts = () => {
   // get access to any state associated with this context (ContactState)
   const contactContext = useContext(ContactContext);
-  const { contacts } = contactContext;
+  const { contacts, filtered } = contactContext;
+
+  if (contacts.length === 0) {
+    return (
+      <div>
+        <h4 className='card text-center'>
+          Start adding contacts
+          <br />
+          <i class='far fa-hand-point-left large'> </i>
+        </h4>
+      </div>
+    );
+  }
+
   return (
     // map through the contacts array
     <Fragment>
-      {contacts.map((contact) => (
-        <ContactItem key={contact.id} contact={contact} />
-      ))}
+      {filtered !== null
+        ? filtered.map((contact) => (
+            <ContactItem key={contact.id} contact={contact} />
+          ))
+        : contacts.map((contact) => (
+            <ContactItem key={contact.id} contact={contact} />
+          ))}
     </Fragment>
   );
 };
