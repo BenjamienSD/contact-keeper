@@ -19,6 +19,8 @@ const ContactForm = () => {
     }
   }, [contactContext, current]);
 
+  // SET DEFAULT CONTACT FORM STATE
+  /////////////////////////////////
   const [contact, setContact] = useState({
     name: '',
     email: '',
@@ -26,13 +28,18 @@ const ContactForm = () => {
     type: 'personal',
   });
 
+  // DISPLAY USER INPUT
+  /////////////////////
   const onChange = (e) =>
     setContact({ ...contact, [e.target.name]: e.target.value });
-
+  // CLEAR FIELDS
+  ///////////////
   const clearAll = () => {
     clearCurrent();
   };
 
+  // CONTACT SUBMISSION
+  /////////////////////
   const onSubmit = (e) => {
     e.preventDefault();
     if (current === null) {
