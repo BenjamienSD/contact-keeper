@@ -28,10 +28,10 @@ export const Navbar = ({ title, icon }) => {
     <Fragment>
       <li>
         <Link to='/login'>
-          <i class='fas fa-sign-in-alt'></i> Login
+          <i className='fas fa-sign-in-alt'></i> Login
         </Link>
         <Link to='/register'>
-          <i class='fas fa-fingerprint'></i> Register
+          <i className='fas fa-fingerprint'></i> Register
         </Link>
       </li>
     </Fragment>

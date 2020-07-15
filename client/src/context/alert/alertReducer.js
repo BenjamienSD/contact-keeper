@@ -1,5 +1,4 @@
 import { SET_ALERT, REMOVE_ALERT } from '../types';
-import { STATES } from 'mongoose';
 
 export default (state, action) => {
   switch (action.type) {
