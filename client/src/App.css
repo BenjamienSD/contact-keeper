@@ -256,12 +256,16 @@ img {
 }
 
 .btn-primary,
-.bg-primary,
 .badge-primary,
 .alert-primary {
   background: var(--primary-color);
   color: #fdf5eb;
   border-radius: 3px;
+}
+
+.bg-primary {
+  background: var(--primary-color);
+  color: #fdf5eb;
 }
 
 .btn-light,
