@@ -428,12 +428,12 @@ table th {
 }
 .item-exit {
   opacity: 1;
-  transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+  transform: translate3d(0, 0, 0) scale3d(1, 1, 1) skew(20deg, 0deg);
 }
 .item-exit-active {
   opacity: 0;
   transition: all 250ms;
-  transform: translate3d(100%, 0, 0) scale3d(0, 1, 1);
+  transform: translate3d(100%, 0, 0) scale3d(0, 0, 0) skew(20deg, 0deg);
 }
 
 /* Mobile Styles */
