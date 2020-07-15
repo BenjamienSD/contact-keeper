@@ -1,10 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import AlertContext from '../../context/alert/alertContext';
+import AuthContext from '../../context/auth/authContext';
 
-const Login = () => {
+const Login = (props) => {
+  const alertContext = useContext(AlertContext);
+  const authContext = useContext(AuthContext);
+
+  const { login, error, clearErrors, isAuthenticated } = authContext;
+  const { setAlert } = alertContext;
+
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
+
+  // DISPLAY ERRORS AND REDIRECT
+  //////////////////////////////
+  useEffect(() => {
+    // redirect if authenticated
+    if (isAuthenticated) {
+      props.history.push('/');
+    }
+    if (error === 'Invalid credentials' || error === 'Incorrect password') {
+      setAlert(error, 'danger');
+      clearErrors();
+    }
+    //eslint-disable-next-line
+  }, [error, isAuthenticated, props.history]);
 
   const { email, password } = user;
   const onChange = (e) => {
@@ -14,9 +36,18 @@ const Login = () => {
     });
   };
 
+  // SUBMITTING LOGIN
+  ///////////////////
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log('Login Submit');
+    if (email === '' || password === '') {
+      setAlert('Make sure to fill out all the fields', 'danger');
+    } else {
+      login({
+        email,
+        password,
+      });
+    }
   };
 
   return (
