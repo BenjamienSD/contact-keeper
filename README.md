@@ -1,2 +1,2 @@
 # contact-keeper
-traversy contact keeper
+https://bsdcontactkeeper.herokuapp.com/register
